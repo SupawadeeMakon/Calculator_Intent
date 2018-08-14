@@ -19,6 +19,7 @@ public class ResultActivity extends AppCompatActivity {
         setContentView(R.layout.activity_result);
 
         //รับค่า จาก input
+        
         Intent intent = getIntent();
         String Tem = intent.getExtras().getString("Temperature");
         String unit = intent.getExtras().getString("Unit");
