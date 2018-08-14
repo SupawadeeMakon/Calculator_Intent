@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     private Button button;
     private RadioGroup radioGroup;
     private String strTemperature ,strTem = "Celsius", strAnswer;
-    private double douFactor, douAnswer,var;
+    private double douAnswer;
     private MyAlertDialog myAlertDialog;
 
 
@@ -40,37 +40,76 @@ public class MainActivity extends AppCompatActivity {
 
                 try {
                     strTemperature = editText.getText().toString().trim();
+
                     if (strTemperature.equals("")) {
                         Log.d("Supawadee", "Have space in blank");
                         myAlertDialog = new MyAlertDialog();
                         myAlertDialog.HavespaceDialog(MainActivity.this);
 
-                    } else {
-                        if (strTem=="Celsius") {
+                    }
+                    else if (strTem=="Celsius"){
+
                             calculateAnswer();
+
                             Log.d("Supawadee", "No space =" + strTemperature);
                             Log.d("Supawadee1", "Unit = " + strTem);
                             Log.d("Supawadee3", "Answer = " + strAnswer);
+
+                            myAlertDialog = new MyAlertDialog();
+                            myAlertDialog.ShowAnwer(MainActivity.this, strTemperature, strAnswer, strTem);
+
+                            Intent intent = new Intent(MainActivity.this, ResultActivity.class);
+                            intent.putExtra("Temperature", strTemperature);
+                            intent.putExtra("Unit", strTem);
+                            intent.putExtra("Answer", strAnswer);
+                            startActivity(intent);
+                        }
+
+                    else if (strTem=="Fahrenheit") {
+
+                            calculateAnswer1();
+
+                            Log.d("Supawadee", "No space =" + strTemperature);
+                            Log.d("Supawadee1", "Unit = " + strTem);
+                            Log.d("Supawadee3", "Answer = " + strAnswer);
+
                             myAlertDialog = new MyAlertDialog();
                             myAlertDialog.ShowAnwer(MainActivity.this,strTemperature,strAnswer,strTem);
+
+                            Intent intent = new Intent(MainActivity.this, ResultActivity.class);
+                            intent.putExtra("Temperature", strTemperature);
+                            intent.putExtra("Unit", strTem);
+                            intent.putExtra("Answer", strAnswer);
+                            startActivity(intent);
                         }
-                        else if (strTem=="Fahrenheit") {
-                            calculateAnswer1();
-                            Log.d("Supawadee", "No space =" + strTemperature);
-                            Log.d("Supawadee1", "Unit = " + strTem);
-                            Log.d("Supawadee3", "Answer = " + strAnswer);
-                            myAlertDialog.ShowAnwer(MainActivity.this,strTemperature,strAnswer,strTem);
-                        }
-                        else if (strTem=="Kelvin") {
+                    else if (strTem=="Kelvin") {
+
                             calculateAnswer2();
                             Log.d("Supawadee", "No space =" + strTemperature);
                             Log.d("Supawadee1", "Unit = " + strTem);
                             Log.d("Supawadee3", "Answer = " + strAnswer);
-                            myAlertDialog.ShowAnwer(MainActivity.this,strTemperature,strAnswer,strTem);
-                        }
-                    }
 
-                } catch (Exception e) {
+                            myAlertDialog = new MyAlertDialog();
+                            myAlertDialog.ShowAnwer(MainActivity.this,strTemperature,strAnswer,strTem);
+
+                            Intent intent = new Intent(MainActivity.this, ResultActivity.class);
+                            intent.putExtra("Temperature", strTemperature);
+                            intent.putExtra("Unit", strTem);
+                            intent.putExtra("Answer", strAnswer);
+                            startActivity(intent);
+                        }
+
+                       /* Intent intent = new Intent(MainActivity.this, ResultActivity.class);
+                        intent.putExtra("Temperature", strTemperature);
+                        intent.putExtra("Unit", strTem);
+                        intent.putExtra("Answer", strAnswer);
+                        startActivity(intent);*/
+
+
+
+                }
+
+                catch (Exception e) {
 
                 }
                 //ทำการลิ้งไปอีกเพจ Intent to ResultActivity
